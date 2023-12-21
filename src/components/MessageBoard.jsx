@@ -6,51 +6,63 @@ function MessageBoard() {
 
   const handleTodoTextChange = (event) => {
     setMessageText(event.target.value);
-  }
+  };
 
-  const addMessage = () => {
-    event.preventDefault()
-    const newMessage = [...message]
-    newMessage.push(messageText)
-    setMessage(newMessage)
-  }
+  const addMessage = (event) => {
+    event.preventDefault();
+    const newMessage = [...message];
+    newMessage.push(messageText);
+    console.log(newMessage);
+    setMessage(newMessage);
+  };
 
   const deleteMessage = (messageIndex) => {
-    const newMessage = [...message]
-    newMessage.splice(messageIndex, 1)
-    setMessage(newMessage)
-  }
+    const newMessage = [...message];
+    newMessage.splice(messageIndex, 1);
+    console.log(newMessage);
+    setMessage(newMessage);
+  };
 
   return (
-    <form>
-    <div className="app-wrapper">
-      <h1 class="app-title">Message board</h1>
-      <div class="message-input-container">
-        <label>
-          <input
-            id="message-text"
-            name="message-text"
-            type="text"
-            onChange={handleTodoTextChange}
-            placeholder="Enter message here"
-          />
-        </label>
-        <button onClick={addMessage} className="submit-message-button">Submit</button>
-      </div>
-      <div class="board">
-        {message.map((item) => {
-          return(
-              <div className="message">
+    
+      <div className="app-wrapper">
+        <h1 className="app-title">Message board</h1>
+        <form>
+        <div className="message-input-container">
+          <label>
+            <input
+              id="message-text"
+              name="message-text"
+              type="text"
+              onChange={handleTodoTextChange}
+              placeholder="Enter message here"
+            />
+          </label>
+          <button onClick={addMessage} className="submit-message-button">
+            Submit
+          </button>
+        </div>
+        </form>
+        <div className="board">
+          {message.map((item, index) => {
+            return (
+              <div className="message" >
                 <h1>{item}</h1>
-              <button onClick={() => {
-                deleteMessage(index);
-              }} className="delete-button">x</button>
-             </div>
-          )
-        })}     
+                <button
+                  className="delete-button"
+                  onClick={() => {
+                    deleteMessage(index);
+                  }}
+                >
+                  x
+                </button>
+              </div>
+            );
+          })}
+        </div>
       </div>
-    </div>
-    </form>
+      
+    
   );
 }
 
